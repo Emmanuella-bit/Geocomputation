@@ -171,3 +171,9 @@ target_rast = rast(xmin = 794650, xmax = 798250,
                    resolution = 300, crs = "EPSG:32717")
 
 dem_resampl = resample(dem, y = target_rast, method = "bilinear")
+
+
+
+
+##########################################summary of learning outcome###################################
+#1. st_buffer () creates a region around a point, line, or pol

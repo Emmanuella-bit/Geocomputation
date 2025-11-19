@@ -220,18 +220,60 @@ aut_ch = merge(aut, ch)
 
 
 
-########### Summary 
+########### Summary ###############################################
 ## A) Spatial relations (who is where?)
 #st_intersects() – overlaps in any way
+#Find which rivers intersect with protected areas.
+# prob_rivers <- rivers[st_intersects(rivers, protected_areas), ]
+# count # nrow(schools_near_hwy)
+
 #st_within() – A is inside B
+#eg which schools falls inside  Accra Metropolitan
+# schools_in_accra <- schools[st_within(schools, accra_boundary), ]
+
 #st_contains() – B contains A
-#st_touches() – boundaries touch
+
+#st_touches() – boundaries touch or meet
+
 #st_crosses() – lines cross
-#st_distance() – how far apart
+
+#st_distance() – how far apart 
+#eg.Distance between Cape Coast and Takoradi, st_distance(cape_coast, takoradi)
+#Select all hospitals within 5 km of major roads
+#
+
 
 ## B) Geometry operations (change the shapes)
 #st_buffer() – create zones (e.g. 1 km around a road)
+#eg 2 km buffer around highways in Kumasi 
+# kma_highway_zone <- st_buffer(highways_kma, dist = 2000)
+# steps: buffer roads and use within
+#roads_buf <- st_buffer(roads, 5000)
+#hospitals_near_road <- hospitals[st_within(hospitals, roads_buf), ]
+
+
 #st_union() – merge multiple shapes
-#st_intersection() – keep overlapping areas
+#eg.Merge all regions into one Ghana polygon ## ghana <- st_union(regions)
+
+
+#st_intersection() – keep overlapping areas (share space)
+#st_intersects(roads, buildings)
+
 #st_difference() – subtract one area from another
-#st_crop()/st_clip() – clip to a boundary
+
+#st_crop()/st_clip() – clip to a boundary 
+#Clip Ghana population raster to Ashanti region
+#pop_ashanti <- terra::crop(pop_gh, ashanti)
+
+
+
+## C) Spatial joins (transfer attributes by location)
+#Assigning polygon ID  to points, or vice versa
+# st_join(points, polygons)
+
+## D) CRS transformations (very important)
+#Distance and areas require projected CRS
+#st_transform(data, 32630) #this is for Ghana
+#eg Calculate the area of each district in square kilometres.
+# districts_m <- st_transform(districts, 32630)
+#districts_m$area_km2 <- st_area(districts_m) / 1e6
