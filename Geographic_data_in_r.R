@@ -68,7 +68,6 @@ class(world_dfr)
 class(world_tbl)
 
 
-
 #Basic maps mapping
 #Basic geographic visualizations (maps) are created in sf with base R’s plot() function.
 plot(world[3:6])

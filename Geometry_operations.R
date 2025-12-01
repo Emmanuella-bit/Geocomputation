@@ -176,4 +176,5 @@ dem_resampl = resample(dem, y = target_rast, method = "bilinear")
 
 
 ##########################################summary of learning outcome###################################
-#1. st_buffer () creates a region around a point, line, or pol
+#1. st_buffer () creates a region around a point, line, or polygon z.B. 500m around a school, 1 km around a river, 3km danger zone around a highway
+school_zone <- st_buffer(schools, dist = 500)
