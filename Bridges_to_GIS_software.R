@@ -12,6 +12,7 @@ install.packages("Rsagacmd")
 install.packages("rgrass")
 install.packages("rstac")
 install.packages("gdalcubes")
+install.packages("qgis_plugins")
 
 library(qgisprocess)
 
@@ -23,6 +24,13 @@ aggzone_wgs = st_transform(aggregating_zones, "EPSG:4326")
 
 # output not shown
 qgis_algorithms()
+print(qgis_algorithms(), n = Inf)
+
+install.packages("tidyverse")
+library(tidyverse)
+algo = qgis_algorithms()
+unique(algo$algorithm_title)
+qgis_search_algorithms("clean", include_deprecated = )
 
 qgis_search_algorithms("union")
 
@@ -46,18 +54,19 @@ qgis_search_algorithms("clean")
 
 ######grass does not work, will look into it later with my qgis installation
 
-qgis_show_help("grass:v.clean")
+qgis_show_help("grass7:v.clean")
 
 qgis_get_argument_specs("grass:v.clean") |>
   select(name, description) |>
   slice_head(n = 4)
+qgis_algorithms()
 
-clean = qgis_run_algorithm("grass:v.clean",
+
+clean = qgis_run_algorithm("grass7:v.clean",
                            input = union_sf, 
                            tool = "rmarea", threshold = 25000
 )
 clean_sf = st_as_sf(clean)
-
 
 
 #######################rasta data##########################
