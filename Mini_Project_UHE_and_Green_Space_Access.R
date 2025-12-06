@@ -252,9 +252,9 @@ ui <- fluidPage(
   )
 )
 
-##########
+###############
 # SHINY SERVER
-############
+###############
 
 server <- function(input, output, session) {
   
